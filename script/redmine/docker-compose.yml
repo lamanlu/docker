@@ -1,0 +1,19 @@
+version: '2'
+services:
+    mysql:
+        build: ./mysql
+        ports:
+            - "3308:3306"
+        volumes:
+            - /data/redmine/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: Redroot_123
+    redmine:
+        build: ./redmine
+        ports:
+            - "3000:3000"
+        links:
+            - mysql
+        volumes:
+            - /data/redmine/files:/usr/src/redmine/files
+            

@@ -1,0 +1,53 @@
+启动服务
+sudo service docker start
+
+
+查看docker概况
+docker info
+
+进入容器：
+docker exec -it 容器名称  /bin/bash
+
+
+If you would like to use Docker as a non-root user, you should now consider
+adding your user to the "docker" group with something like:
+
+  sudo usermod -aG docker your-user
+
+Remember that you will have to log out and back in for this to take effect!
+
+
+【CentOS】
+查看端口情况：netstat -ntlp
+
+
+
+
+【Nginx】
+创建镜像：docker build -t laman/nginx ./
+创建容器：docker run --name web_nginx -p 80:80 -v /mnt/hgfs/project:/www -v /data:/data -v /mnt/hgfs/project/Docker/my_dockers/nginx/nginx.conf:/etc/nginx/nginx.conf -v /mnt/hgfs/project/Docker/my_dockers/nginx/sites:/etc/nginx/conf.d/ -d laman/nginx
+
+【Mysql】
+创建镜像：docker build -t laman/mysql ./
+创建容器：docker run --name mysql_01 -p 3306:3306 -v /data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d laman/mysql
+
+【Redis】
+创建镜像：docker build -t laman/redis ./
+创建容器：docker run --name redis_7000 -p 7000:6379 -d laman/redis
+
+【PHP】
+创建镜像：docker build -t laman/php_5.6.22 ./
+创建容器：docker run --name php-fpm -p 9000:9000 -d laman/php_5.6.22
+
+【安装compose】
+curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+或者
+pip install docker-compose
+
+
+【TO DO】
+MySQL  my.cnf  主从
+Redis持久化
+Openresty
+Solr
