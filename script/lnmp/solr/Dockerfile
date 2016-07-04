@@ -1,2 +1,2 @@
-FROM solr:6.1.0
+FROM solr:6.1
 MAINTAINER LamanLu

@@ -39,6 +39,8 @@ Remember that you will have to log out and back in for this to take effect!
 创建镜像：docker build -t laman/php_5.6.22 ./
 创建容器：docker run --name php-fpm -p 9000:9000 -d laman/php_5.6.22
 
+docker run -d -P -v /data/solr/mycores:/opt/solr/server/solr/mycores solr:6.1.0 solr-precreate mycore
+
 【安装compose】
 curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
@@ -50,4 +52,3 @@ pip install docker-compose
 MySQL  my.cnf  主从
 Redis持久化
 Openresty
-Solr
