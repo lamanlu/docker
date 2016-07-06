@@ -42,10 +42,10 @@ services:
             - mysql_master
         volumes:
             - /data/solr/mycores:/opt/solr/server/solr/mycores
-#        entrypoint:
-#            - docker-entrypoint.sh
-#            - solr-precreate
-#            - mycore
+        entrypoint:
+            - docker-entrypoint.sh
+            - solr-precreate
+            - demo
         
         
     

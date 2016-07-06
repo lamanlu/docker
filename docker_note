@@ -52,3 +52,6 @@ pip install docker-compose
 MySQL  my.cnf  主从
 Redis持久化
 Openresty
+
+SOLR MYSQL CONNECTER
+http://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz
