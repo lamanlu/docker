@@ -38,15 +38,11 @@ services:
         build: ./solr
         ports:
             - "8983:8983"
-        links:
-            - mysql_master
         volumes:
             - /data/solr/mycores:/opt/solr/server/solr/mycores
-#        entrypoint:
-#            - docker-entrypoint.sh
-#            - solr-precreate
-#            - demo
-        
-        
-    
-        
+        links:
+            - mysql_master
+        entrypoint:
+            - docker-entrypoint.sh
+            - solr-precreate
+            - mysql_source

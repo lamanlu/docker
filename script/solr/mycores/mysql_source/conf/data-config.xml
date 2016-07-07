@@ -1,0 +1,11 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://mysql_master/museed_main" user="root" password="Devroot_123"/>
+    <document>
+        <entity name="city" query="select id, `name` ,name_en, `desc` from mx_city">
+            <field column="id" name="id" />
+            <field column="name" name="name" />
+            <field column="name_en" name="name_en" />
+            <field column="desc" name="desc" />
+        </entity>
+    </document>
+</dataConfig>
