@@ -17,6 +17,7 @@ services:
             - "3306:3306"
         volumes:
             - /data/mysql:/var/lib/mysql
+            - ./mysql/conf.d/:/etc/mysql/conf.d
         environment:
             MYSQL_ROOT_PASSWORD: Devroot_123
     redis_6379:
