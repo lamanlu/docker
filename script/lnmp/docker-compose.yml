@@ -31,6 +31,7 @@ services:
         links:
             - mysql_master
             - redis_6379
+            - solr
         volumes:
             - ./php/php.ini:/usr/local/etc/php/php.ini 
             - ./php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf 
