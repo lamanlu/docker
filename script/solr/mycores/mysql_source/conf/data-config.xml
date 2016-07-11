@@ -1,18 +1,23 @@
 <dataConfig>
     <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://mysql_master/museed_main" user="root" password="Devroot_123"/>
     <document>
-        <entity name="city" query="select id, `name` ,name_en, `desc` from mx_city">
+        <entity name="city" query="select id, country_id, `name`, name_en, `desc` from mx_city">
             <field column="id" name="id" />
             <field column="name" name="name" />
             <field column="name_en" name="name_en" />
             <field column="desc" name="desc" />
             
             <entity name="country" 
-                    query="SELECT id AS country_id,`name`,`en_name`,`desc`,seo_keywords FROM mx_country WHERE country_id = ${city.country_id}">
+                    query="SELECT id ,`name`,`en_name`,`desc`,seo_keywords FROM mx_country WHERE id = ${city.country_id}">
                 <field column="name" name="country_name" />
-                <field column="name_en" name="country_name_en" />
+                <field column="en_name" name="country_name_en" />
                 <field column="desc" name="country_desc" />
                 <field column="seo_keywords" name="country_kw" />
+            </entity>
+            
+            <entity name="tag" 
+                    query="SELECT B.tag_name FROM mx_tag_relate A LEFT JOIN mx_tag B ON A.tag_id = B.id WHERE A.source_type = 1 AND A.source_id = ${city.id}">
+                <field column="tag_name" name="tag_name" />
             </entity>
             
         </entity>
