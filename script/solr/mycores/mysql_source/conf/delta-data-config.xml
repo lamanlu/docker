@@ -1,0 +1,36 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://192.168.1.192:3306/museed_main" user="root" password="Tester_2016"/>
+    <document name="test_data">
+        <entity name="city" pk="id" 
+                query="SELECT id, country_id, `name`, name_en, `desc`, `update_time` AS sort_time FROM mx_city"
+                deltaImportQuery="SELECT id, country_id, `name`, name_en, `desc`, `update_time` AS sort_time FROM mx_city WHERE id = '${dih.delta.id}'"
+                deltaQuery="SELECT id FROM mx_city WHERE update_time > UNIX_TIMESTAMP('${dih.last_index_time}')"
+                parentDeltaQuery="SELECT id, country_id, `name`, name_en, `desc`, `update_time` AS sort_time FROM mx_city WHERE id = ${city.id}">
+            <field column="id" name="id" />
+            <field column="name" name="name" />
+            <field column="name_en" name="name_en" />
+            <field column="desc" name="desc" />
+            <field column="sort_time" name="update_time" />
+            
+            <entity name="country" 
+                    query="SELECT id ,`name`,`en_name`,`desc`,seo_keywords FROM mx_country WHERE id = ${city.country_id}"                    
+                    deltaImportQuery="SELECT id ,`name`,`en_name`,`desc`,seo_keywords FROM mx_country WHERE id = ${city.country_id}"
+                    deltaQuery="SELECT id FROM mx_country WHERE update_time > UNIX_TIMESTAMP('${dih.last_index_time}')"
+                    parentDeltaQuery="SELECT id ,`name`,`en_name`,`desc`,seo_keywords FROM mx_country WHERE id = ${country.id}">
+                <field column="name" name="country_name" />
+                <field column="en_name" name="country_name_en" />
+                <field column="desc" name="country_desc" />
+                <field column="seo_keywords" name="country_kw" />
+            </entity>
+            
+<!--            <entity name="tag" 
+                    query="SELECT B.tag_name FROM mx_tag_relate A INNER JOIN mx_tag B ON A.tag_id = B.id WHERE A.source_type = 1 AND A.source_id = ${city.id}"
+                    deltaImportQuery="SELECT B.tag_name FROM mx_tag_relate A INNER JOIN mx_tag B ON A.tag_id = B.id WHERE A.source_type = 1 AND A.source_id = ${city.id}"                    
+                    deltaQuery="SELECT B.id FROM mx_tag_relate A INNER JOIN mx_tag B ON A.tag_id = B.id WHERE A.source_type = 1 AND A.source_id = ${city.id}"
+                    parentDeltaQuery="SELECT tag_name FROM mx_tag WHERE id = ${tag.id}">
+                <field column="tag_name" name="tag_name" />
+            </entity>-->
+            
+        </entity>
+    </document>
+</dataConfig>

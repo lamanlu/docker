@@ -1,39 +1,51 @@
 <?php
-$options = array(
-    'hostname' => 'solr',
-    'port'     => 8983,
-    'path' => '/solr/mysql_source',
-    'wt' => 'json',
-    'timeout' => 10,
-);
 
-$client = new SolrClient($options);
-$pingresponse = $client->ping();
+$kw = $_POST['keyword'];
 
-$query = new SolrQuery();
-$query->setQuery('*:*');
-$query->setStart(0);
-$query->setRows(50);
+search($kw);
 
-$query->addFilterQuery("name:赫尔 OR name_en:kuop*");
-$query->addFilterQuery("desc:皮");
+function search($keyword = '', $start = 0, $limit = 10){
+    
+    $options = array(
+        'hostname' => 'solr',
+        'port'     => 8983,
+        'path' => '/solr/mysql_source',
+        'wt' => 'json',
+        'timeout' => 10,
+    );
 
-$query->addField('name')
-        ->addField('name_en')
-        ->addField('desc')
-        ->addField('tag_name');
+    $client = new SolrClient($options);
+    $pingresponse = $client->ping();
 
-$query_response = $client->query($query);
-$response = $query_response->getResponse();
+    $query = new SolrQuery();
+    $query->setQuery('*:*');
+    $query->setStart($start);
+    $query->setRows($limit);
 
-echo $query_response->getRequestUrl()."<br>";
-//var_dump($response);
+    $keyword = trim($keyword);
+    if($keyword != ''){
+        $queryStr = "name:$keyword OR name_en:*$keyword* OR country_name:$keyword OR country_name_en:*$keyword* OR country_kw:$keyword";
+        $query->addFilterQuery($queryStr);
+    }
+    
+    $query->addSortField('update_time',1);
+//    $query->addField('name')
+//            ->addField('name_en')
+//            ->addField('desc')
+//            ->addField('tag_name');
+    $query->addField('*');
 
-$docs = $response->response->docs;
-foreach($docs as $doc){
-    print_r($doc);
+    $query_response = $client->query($query);
+    $response = $query_response->getResponse();
+
+    echo $query_response->getRequestUrl()."<br>";
+//    var_dump($response);
+
+    $docs = $response->response->docs;
+    foreach($docs as $doc){
+        print_r($doc);
+    }
+
+    echo $client->getDebug();
 }
-
-echo $client->getDebug();
-
 

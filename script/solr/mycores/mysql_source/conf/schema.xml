@@ -113,11 +113,12 @@
    <field name="name" type="textComplex" indexed="true" stored="true" required="true" multiValued="false" />
    <field name="name_en" type="text_general" indexed="true" stored="true" required="true" multiValued="false" />
    <field name="desc" type="textComplex" indexed="true" stored="true" required="true" multiValued="false" /> 
+   <field name="update_time" type="string" indexed="true" stored="true" required="true" multiValued="false" />
    <field name="country_name" type="textComplex" indexed="true" stored="true" required="true" multiValued="false" />
    <field name="country_name_en" type="textComplex" indexed="true" stored="true" required="true" multiValued="false" />
    <field name="country_desc" type="textComplex" indexed="true" stored="true" required="true" multiValued="false" />
-   <field name="country_kw" type="textComplex" indexed="true" stored="true" required="true" multiValued="true" />
-   <field name="tag_name" type="textComplex" indexed="true" stored="true" required="false" multiValued="true" />
+   <field name="country_kw" type="textComplex" indexed="true" stored="true" required="true" multiValued="false" />
+   <!--<field name="tag_name" type="textComplex" indexed="true" stored="true" required="true" default="" multiValued="true" />-->
 
    <!-- Dynamic field definitions allow using convention over configuration
        for fields via the specification of patterns to match field names. 

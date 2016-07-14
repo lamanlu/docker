@@ -1,11 +1,12 @@
 <dataConfig>
-    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://mysql_master/museed_main" user="root" password="Devroot_123"/>
-    <document>
-        <entity name="city" query="select id, country_id, `name`, name_en, `desc` from mx_city">
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://mysql_master:3306/museed_main" user="root" password="Devroot_123"/>
+    <document name="test_data">
+        <entity name="city" pk="id" query="SELECT id, country_id, `name`, name_en, `desc`, `update_time` AS sort_time FROM mx_city">
             <field column="id" name="id" />
             <field column="name" name="name" />
             <field column="name_en" name="name_en" />
             <field column="desc" name="desc" />
+            <field column="sort_time" name="update_time" />
             
             <entity name="country" 
                     query="SELECT id ,`name`,`en_name`,`desc`,seo_keywords FROM mx_country WHERE id = ${city.country_id}">
