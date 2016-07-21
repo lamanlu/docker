@@ -1,24 +1,35 @@
 version: '2'
 services:
     logstash:
-        build: ./logstash        
+        build: ./logstash  
+        volumes:
+            - ./logstash/conf.d/:/etc/logstash/conf.d/
         networks:
             - inner
-    elasticsearch:
-        build: ./elasticsearch
+#        entrypoint:
+#            - /docker-entrypoint.sh
+#            - logstash
+#            - -f /etc/logstash/conf.d/
+#    elasticsearch:
+#        build: ./elasticsearch
+#        ports:
+#            - "9200:9200"
+#            - "9300:9300"
+#        networks:
+#            - inner
+#    kibana:
+#        build: ./kibana
+#        ports:
+#            - "5610:5610"
+#        depends_on:
+#            - elasticsearch
+#        networks:
+#            - inner
+    redis:
+        image: redis:3.2.0
         ports:
-            - "9200:9200"
-            - "9300:9300"
-        networks:
-            - inner
-    kibana:
-        build: ./kibana
-        ports:
-            - "5610:5610"
-        depends_on:
-            - elasticsearch
+            - "7000:6379"
         networks:
             - inner
 networks:
-    outter:
     inner:
