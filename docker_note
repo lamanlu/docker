@@ -55,3 +55,8 @@ Openresty
 
 SOLR MYSQL CONNECTER
 http://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz
+
+
+【Logstash】
+docker run -it --rm logstash:2.3.4 logstash -e 'input { stdin { } } output { stdout { } }'
+docker run  --name log_shipper -d -v /mnt/hgfs/Projects/docker/script/ELK/logstash/conf.d/:/etc/logstash/conf.d/ logstash:2.3.4 logstash -f /etc/logstash/conf.d/test.conf

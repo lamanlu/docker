@@ -1,15 +1,16 @@
 version: '2'
 services:
     logstash:
-        build: ./logstash  
+        build: ./logstash 
+#        image: logstash:2.3.4
         volumes:
-            - ./logstash/conf.d/:/etc/logstash/conf.d/
+            - /data/logstash/config/:/etc/logstash/conf.d/
+            - /var/log/nginx:/var/log/nginx
+#        stdin_open: true
+        tty: true
         networks:
             - inner
-#        entrypoint:
-#            - /docker-entrypoint.sh
-#            - logstash
-#            - -f /etc/logstash/conf.d/
+        command: logstash -f /etc/logstash/conf.d/test.conf
 #    elasticsearch:
 #        build: ./elasticsearch
 #        ports:
