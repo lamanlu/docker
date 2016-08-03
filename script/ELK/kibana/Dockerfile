@@ -1,2 +1,0 @@
-FROM kibana:4.5.3
-MAINTAINER LamanLu
