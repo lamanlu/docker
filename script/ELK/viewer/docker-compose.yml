@@ -1,0 +1,10 @@
+version: '2'
+services:
+    kibana:
+        build: ./kibana
+        ports:
+            - "5610:5610"
+        networks:
+            - inner
+networks:
+    inner:
