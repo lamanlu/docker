@@ -4,10 +4,10 @@ services:
         build: ./logstash 
 #        image: logstash:2.3.4
         volumes:
-            - /data/logstash/config/:/etc/logstash/conf.d/
+            - ./logstash/conf.d/:/etc/logstash/conf.d/
             - /var/log/nginx:/var/log/nginx
 #        stdin_open: true
-        tty: true
+#        tty: true
         networks:
             - inner
         command: logstash -f /etc/logstash/conf.d/test.conf
