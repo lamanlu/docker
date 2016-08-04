@@ -6,20 +6,23 @@ services:
             - "7000:6379"
         networks:
             - inner
-#    logstash:
-#        build: ../logstash 
-#        volumes:
-#            - ../logstash/conf.d/:/etc/logstash/conf.d/
-#        networks:
-#            - inner
-#        command: logstash -f /etc/logstash/conf.d/indexer.conf
-#    elasticsearch:
-#        build: ./elasticsearch
-#        ports:
-#            - "9200:9200"
-#            - "9300:9300"
-#        networks:
-#            - inner
+    logstash:
+        build: ../logstash 
+        volumes:
+            - ../logstash/conf.d/:/etc/logstash/conf.d/
+        depends_on:
+            - redis_broker
+            - elasticsearch
+        networks:
+            - inner
+        command: logstash -f /etc/logstash/conf.d/indexer.conf
+    elasticsearch:
+        build: ./elasticsearch
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        networks:
+            - inner
 networks:
     inner:
         external:
