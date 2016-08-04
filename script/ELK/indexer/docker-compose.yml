@@ -22,3 +22,5 @@ services:
 #            - inner
 networks:
     inner:
+        external:
+            name: log_inner
