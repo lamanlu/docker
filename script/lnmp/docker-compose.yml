@@ -7,8 +7,8 @@ services:
 #        links:
 #            - php-fpm
 #        volumes:
-#            - /mnt/hgfs/Projects/Docker/my_dockers/lnmp/nginx/nginx.conf:/etc/nginx/nginx.conf
-#            - /mnt/hgfs/Projects/Docker/my_dockers/lnmp/nginx/sites:/etc/nginx/conf.d/
+#            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+#            - ./nginx/sites:/etc/nginx/conf.d/
 #            - /data/log/nginx:/var/log/nginx
 #            - /mnt/hgfs/Projects:/www
     mysql_master:
