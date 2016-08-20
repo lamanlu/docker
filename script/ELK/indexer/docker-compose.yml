@@ -3,7 +3,7 @@ services:
     redis_broker:
         image: redis:3.2.0
         ports:
-            - "7000:6379"
+            - "6400:6379"
         networks:
             - inner
     logstash:
@@ -26,4 +26,4 @@ services:
 networks:
     inner:
         external:
-            name: log_inner
+            name: docker_inner

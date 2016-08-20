@@ -11,4 +11,4 @@ services:
 networks:
     inner:
         external:
-            name: log_inner
+            name: docker_inner
