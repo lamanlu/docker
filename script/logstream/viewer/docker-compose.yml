@@ -1,0 +1,14 @@
+version: '2'
+services:
+    kibana:
+        build: ./kibana
+        ports:
+            - "5610:5610"
+        networks:
+            - inner
+        environment:
+            - ELASTICSEARCH_URL=http://elasticsearch:9200
+networks:
+    inner:
+        external:
+            name: docker_inner

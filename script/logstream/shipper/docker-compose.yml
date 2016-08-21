@@ -1,0 +1,26 @@
+version: '2'
+services:
+    log_redis:
+        build: ./redis
+        restart: always
+        ports:
+            - "6380:6379"
+        networks:
+            - inner
+    log_php-fpm:
+        build: ./php
+        restart: always
+        ports:
+            - "9001:9000"
+        networks:
+            - inner
+        depends_on:
+            - log_redis
+        volumes:
+            - ./php/php.ini:/usr/local/etc/php/php.ini 
+            - ./php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf 
+            - /code:/www
+networks:
+    inner:
+        external:
+            name: docker_inner
