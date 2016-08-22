@@ -2,6 +2,7 @@ version: '2'
 services:
     logstash:
         build: ./logstash 
+        restart: always
         volumes:
             - ./logstash/conf.d/:/etc/logstash/conf.d/
         depends_on:
@@ -11,6 +12,7 @@ services:
         command: logstash -f /etc/logstash/conf.d/indexer.conf
     elasticsearch:
         build: ./elasticsearch
+        restart: always
         ports:
             - "9200:9200"
             - "9300:9300"
