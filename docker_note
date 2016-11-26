@@ -17,6 +17,11 @@ adding your user to the "docker" group with something like:
 Remember that you will have to log out and back in for this to take effect!
 
 
+删除已经退出的容器
+docker rm $(docker ps -a -q)
+
+
+
 【CentOS】
 查看端口情况：netstat -ntlp
 

@@ -4,7 +4,7 @@ services:
         build: ./mysql
         restart: always
         ports:
-            - "3306:3306"
+            - "127.0.0.1:3306:3306"
         networks:
             - inner
         volumes:
@@ -16,23 +16,23 @@ services:
         build: ./redis
         restart: always
         ports:
-            - "6379:6379"
+            - "127.0.0.1:6379:6379"
         networks:
             - inner
     php-fpm:
         build: ./php
         restart: always
         ports:
-            - "9000:9000"
+            - "127.0.0.1:9000:9000"
         networks:
             - inner
         depends_on:
             - mysql
             - redis_6379
         volumes:
-            - ./php/php.ini:/usr/local/etc/php/php.ini 
-            - ./php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf 
-            - /code:/www
+            - ./php/php.ini:/usr/local/etc/php/php.ini
+            - ./php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
+            - /projects/code/php:/www
 networks:
     inner:
         external:
